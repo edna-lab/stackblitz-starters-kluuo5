@@ -1,0 +1,54 @@
+<div class="container"> 
+
+<h2>Salvar Livro</h2>
+
+<form (ngSubmit)="onSubmit()" #livroForm="ngForm" novalidate>
+
+    <div [ngClass]="getFormGroupClass(name.valid,name.pristine)">
+        <label for="name" class="form-control-label">Nome</label>
+        <input type="text" class="form-control form-control-danger" placeholder="Informe o nome"
+        [ngClass]="getFormControlClass(name.valid, name.pristine)"
+        required
+        #name="ngModel"
+        name="name"
+        [ngModel]="livro?.name"
+        (ngModelChange)="livro.name = $event">
+        <div class="form-control-feedback" [hidden]="name.valid || name.pristine">O campo nome deve ser informado</div>
+    </div>
+
+    <div [ngClass]="getFormGroupClass(type.valid,type.pristine)">
+        <label for="type">Tipo</label>
+        <input type="email" class="form-control" placeholder="Informe o tipo"
+        required
+        #type="ngModel"
+        name="type"
+        [ngModel]="livro?.type"
+        (ngModelChange)="livro.type = $event">
+        <div class="form-control-feedback" [hidden]="type.valid || type.pristine">O campo nome deve ser informado</div>
+    </div>
+
+    <div [ngClass]="getFormGroupClass(description.valid,description.pristine)">
+        <label for="description">Descrição</label>
+        <input type="text" class="form-control" placeholder="Informe a descrição"
+        required
+        #description="ngModel"
+        name="description"
+        [ngModel]="livro?.description"
+        (ngModelChange)="livro.description = $event">
+        <div class="form-control-feedback" [hidden]="description.valid || description.pristine">O campo nome deve ser informado</div>
+    </div>
+
+    <div [ngClass]="getFormGroupClass(year.valid,year.pristine)">
+        <label for="year">Ano</label>
+        <input type="text" class="form-control" placeholder="Informe o ano"
+        required
+        #year="ngModel"
+        name="year"
+        [ngModel]="livro?.year"
+        (ngModelChange)="livro.year = $event">
+        <div class="form-control-feedback" [hidden]="year.valid || year.pristine">O campo nome deve ser informado</div>
+    </div>
+    <button (ngSubmit) = "onSubmit()" class="btn btn-success" [disabled]="!livroForm.form.valid">Salvar</button>
+    <a class="btn btn-secondary" routerLink="/livro">Voltar </a>
+</form>
+</div>

@@ -1,0 +1,31 @@
+<div class="container">
+  <h2 class="py-4">Livros</h2>
+
+  <div class="form-group mb-4">
+    <input class="form-control" type="text" [(ngModel)]="searchText" placeholder="Buscar">
+  </div>
+  <a routerLink="/livro/salvar" class="btn btn-success"> Novo </a>
+  <table class="table" *ngIf="(livros | filter: searchText).length > 0; else noResults">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Tipo</th>
+        <th scope="col">Ano</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let livro of livros | filter: searchText; let i = index" [routerLink]= "['/livro/salvar',livro.id]">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{livro.name}}</td>
+        <td>{{livro.type}}</td>
+        <td>{{livro.year}}</td>
+        <td><button class="btn btn-danger">Deletar</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noResults>
+    <p>Sem resultados para "{{searchText}}".</p>
+  </ng-template>
+</div>
